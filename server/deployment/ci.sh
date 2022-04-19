@@ -3,14 +3,18 @@
 PYTHON_PACKAGES="black pylint"
 cd ./server
 
-echo -e "=== Step 0 install requirements ==="
+if [[ "$1" == "--no-step-0" ]]; then
+  echo -e "=== Skiping python packages install"
+else
+  echo -e "=== Step 0 install requirements ==="
 
-for package in $PYTHON_PACKAGES; do 
-  exist=$(pip list | grep -F $package | wc -l)
-  if [[ $exist -eq "0" ]]; then
-    pip install $package
-  fi
-done
+  for package in $PYTHON_PACKAGES; do 
+    exist=$(pip list | grep -F $package | wc -l)
+    if [[ $exist -eq "0" ]]; then
+      pip install $package
+    fi
+  done
+fi
 
 echo -e "\n\n==== Step 1 One Lint and Format ===="
 
