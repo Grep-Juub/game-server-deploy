@@ -1,0 +1,23 @@
+# Default values for gameserver.
+
+replicaCount: 2
+
+image:
+  repository: gameserver
+  tag: latest
+  pullPolicy: Never
+
+service:
+  type: LoadBalancer
+  port: 7778
+
+deployment:
+  env:
+    - name: LISTEN_PORT
+      value: "7778"
+    - name: LISTEN_ADDRESS
+      value: "0.0.0.0"
+    - name: SERVER_TIMEOUT
+      value: "600"
+    - name: BUFFER_SIZE
+      value: "1024"

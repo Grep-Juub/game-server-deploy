@@ -1,11 +1,12 @@
+import os
 import multiprocessing
 import time
 import socket
 
-LISTEN_ADDRESS = "127.0.0.1"
-LISTEN_PORT = 7778
-SERVER_TIMEOUT = 600
-BUFFER_SIZE = 1024
+LISTEN_ADDRESS = os.getenv('LISTEN_ADDRESS', "127.0.0.1")
+LISTEN_PORT = int(os.getenv('LISTEN_PORT', 7778))
+SERVER_TIMEOUT = int(os.getenv('SERVER_TIMEOUT', 600))
+BUFFER_SIZE = int(os.getenv('BUFFER_SIZE', 1024))
 
 def server(addr, port):
     """
