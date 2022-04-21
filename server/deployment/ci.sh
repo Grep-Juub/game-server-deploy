@@ -24,7 +24,13 @@ python3 -m black --check main.py
 echo -e "Linting ..."
 python3 -m pylint main.py
 
-echo -e "\n\n==== Step 2 Build docker image ===="
+echo -e "\n\n==== Step 1 One Lint and Format ===="
+
+echo -e "Running test..."
+python3 main_test.py
+
+
+echo -e "\n\n==== Step 3 Build docker image ===="
 
 DOCKER_IMAGE_TAG=$(git rev-parse --short HEAD)
 
@@ -32,7 +38,7 @@ DOCKER_IMAGE_TAG=$(git rev-parse --short HEAD)
 eval $(minikube docker-env)
 docker build -t gameserver:$DOCKER_IMAGE_TAG .
 
-echo -e "\n\n==== Step 3 Deploy helm chart ===="
+echo -e "\n\n==== Step 4 Deploy helm chart ===="
 
 cd deployment
 # Here we should create a new release of the helm chart but since we don't have a registry like chartmuseum
